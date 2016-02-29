@@ -20,6 +20,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+	<preference name="android-build-tool" value="gradle" />
 	<feature name="SocialSharing">
 	  <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
 	</feature>
