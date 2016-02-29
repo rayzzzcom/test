@@ -1,0 +1,307 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<style type="text/css" media="screen">@import "css/jquery.mobile-1.4.5.css";</style>
+		<link rel="stylesheet" href="css/blueimp-gallery.css">
+		<link rel="stylesheet" href="css/blueimp-gallery-indicator.css">
+		<link rel="stylesheet" href="css/blueimp-gallery-video.css">
+		<style type="text/css" media="screen">@import "css/style.css";</style>
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/news.js"></script>
+		<script type="text/javascript">
+			var bAndroid = true;
+			var dd = $.Deferred();
+            var jqd = $.Deferred();
+			if(bAndroid)
+				$.when(dd, jqd).done(doInit);
+			else
+				$.when(jqd).done(doInit);
+            $(document).bind('mobileinit', function () {
+				jqd.resolve();
+            });
+			document.addEventListener("deviceready", function(){
+				dd.resolve();
+			}, true);
+        </script>
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+    </head>
+	<body>
+		<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b">
+			<h1><span class="lang title">Визитка</span></h1>
+			<a id="externalpanel_btn" data-icon="bars" class="ui-nodisc-icon" data-iconpos="notext">Меню</a>
+			<a id="langpopup_btn" data-rel="popup" data-iconpos="notext"><img id="lang_img" src="images/ru.jpg" /></a>
+			<div data-role="popup" id="langpopup" style="width:120px;">
+				<span><a href="#" onclick="setLanguage('ru')"><img id="lang_ru" src="images/ru.jpg" style="margin:0 10px 0 0;" />Русский</a></span>
+				<span><a href="#" onclick="setLanguage('en')"><img id="lang_en" src="images/en.jpg" style="margin:0 10px 0 0;" />English</a></span>
+			</div>
+		</div>
+		
+		<div data-role="page" id="main" data-theme="b">
+			<div data-role="content" data-theme="b">
+				<h3><span class="lang news">Новости и акции</span><button style="width:80px;" class="ui-btn ui-corner-all" onclick="navigateTo('news')"><span class="lang news_all">ВСЕ</span></button></h3>
+				<div id="news_short"></div>
+				<div style="clear: both;"></div>
+				<h3>Зачем вашему бизнесу нужно Мобильное приложение?</h3>
+				<p>Если ваша цель - ПРИВЕСТИ НОВЫХ КЛИЕНТОВ в Ваш бизнес;</p>
+				<p>Если Вы не желаете мириться с тем, что Ваши постоянные клиенты уходят;</p>
+				<p>Если для Вас важно БЫСТРО ДОВОДИТЬ ИНФОРМАЦИЮ до своих клиентов, а также ПОЛУЧАТЬ МГНОВЕННУЮ ОБРАТНУЮ СВЯЗЬ;</p>
+				<p>Если для Вас важно БЫТЬ ВПЕРЕДИ КОНКУРЕНТОВ, используя современные инструменты коммуникации.</p>
+				<p>Перед вами приложение визитка, для вашего бизнеса можно разработать такое же или даже с более расширенным функционалом и изысканным дизайном.</p>
+			</div>
+		</div>
+		<div data-role="page" id="contact" data-theme="b">
+			<div data-role="content" data-theme="b">
+				<h3><span class="lang contact">Связаться с нами</span></h3>
+				<div id="map">
+					<span id="lang_offline">Отсутствует соединение с интернет.</span>					
+				</div>				
+				<div>
+					<span class="lang address">Адрес: Гражданский Проспект, 113к3</span><br />
+					<span class="lang phone">Телефон: </span><a href="tel:+79110064722">+7(911) 006-47-22</a><br />
+					E-mail: <a href="mailto:rayzexpert@gmail.com">rayzexpert@gmail.com</a>
+				</div>
+			</div>
+		</div>
+		<div data-role="page" id="news" data-theme="b">
+			<div data-role="content" data-theme="b">
+				<h3><span class="lang news">Новости и акции</span></h3>
+				<div id="news_content"></div>
+			</div>
+		</div>
+		<div data-role="page" id="news_post" data-theme="b">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b">
+				<h1><span class="lang news">Новости и акции</span></h1>
+				<a data-icon="arrow-l" data-rel="back" data-iconpos="notext"></a>
+			</div>
+			<div data-role="content" data-theme="b">
+				<h3 id="news_caption"></h3>
+				<div id="news_icon" class="news_icon"><img src="" /></div>
+				<div id="news_body"></div>
+			</div>
+		</div>
+		<div data-role="page" id="services" data-theme="b">
+			<div data-role="content" data-theme="b">
+				<h3><span class="lang services">Услуги и цены</span></h3>
+				<p><b>Визитка:</b> О нас, Контакты, Как нас найти, Рекомендовать друзьям, Новости, Документы</p>
+				<table style="width: 100%; margin: 0px;">
+					<tr><th>Срок</th><th>Цена (Android или IOS)</th><th>Цена (Android + IOS)</th><th>Сервис / месяц</th>
+					<tr><th>7 дней</th><th>35 000 Р</th><th>55 000 Р</th><th>1 900 Р</th>
+				</table>
+				<hr />
+				<p><b>Лояльность:</b> Визитка+Чтение QR кода, купоны за каждую покупку, программа лояльности(5 уровней), GPS лояльность</p>
+				<table style="width: 100%; margin: 0px;">
+					<tr><th>Срок</th><th>Цена (Android или IOS)</th><th>Цена (Android + IOS)</th><th>Сервис / месяц</th>
+					<tr><th>14 дней</th><th>55 000 Р</th><th>80 000 Р</th><th>3 400 Р</th>
+				</table>
+				<hr />
+				<p><b>Интернет-магазин:</b> Визитка+Лояльность+полноценный интернет магазин(каталог, корзина, купить, оформить, оплатить)</p>
+				<table style="width: 100%; margin: 0px;">
+					<tr><th>Срок</th><th>Цена (Android или IOS)</th><th>Цена (Android + IOS)</th><th>Сервис / месяц</th>
+					<tr><th>18 дней</th><th>95 000 Р</th><th>130 000 Р</th><th>4 500 Р</th>
+				</table>
+			</div>
+		</div>
+		<div data-role="page" id="portfolio" data-theme="b">
+			<div data-role="content" data-theme="b">
+				<h3><span class="lang portfolio">Портфолио</span></h3>
+				<p><span class="lang desc">Здесь будут фотографии из вашего портфолио</span></p>
+				<div id="blueimp-gallery" class="blueimp-gallery">
+					<div class="slides"></div>
+					<h3 class="title"></h3>
+					<a class="prev">‹</a>
+					<a class="next">›</a>
+					<a class="close">×</a>
+					<a class="play-pause"></a>
+					<ol class="indicator"></ol>
+				</div>
+				<div id="links" style="text-align:center;">
+					<a href="img/01.jpg"><img src="img/01t.jpg"></a>
+					<a href="img/02.jpg"><img src="img/02t.jpg"></a>
+					<a href="img/03.jpg"><img src="img/03t.jpg"></a>
+					<a href="img/04.jpg"><img src="img/04t.jpg"></a>
+					<a href="img/05.jpg"><img src="img/05t.jpg"></a>
+					<a href="img/06.jpg"><img src="img/06t.jpg"></a>
+					<a href="img/07.jpg"><img src="img/07t.jpg"></a>
+					<a href="img/08.jpg"><img src="img/08t.jpg"></a>
+					<a href="img/09.jpg"><img src="img/09t.jpg"></a>
+					<a href="img/10.jpg"><img src="img/10t.jpg"></a>
+					<a href="img/11.jpg"><img src="img/11t.jpg"></a>
+					<a href="img/12.jpg"><img src="img/12t.jpg"></a>
+					<a href="img/13.jpg"><img src="img/13t.jpg"></a>
+					<a href="img/14.jpg"><img src="img/14t.jpg"></a>
+					<a href="img/15.jpg"><img src="img/15t.jpg"></a>
+					<a href="img/16.jpg"><img src="img/16t.jpg"></a>
+					<a href="img/17.jpg"><img src="img/17t.jpg"></a>
+					<a href="img/18.jpg"><img src="img/18t.jpg"></a>
+					<a href="img/19.jpg"><img src="img/19t.jpg"></a>
+					<a href="img/20.jpg"><img src="img/20t.jpg"></a>
+				</div>
+			</div>
+		</div>
+		<div data-role="page" id="instagram" data-theme="b">
+			<div data-role="content" data-theme="b">
+				<h3><span class="lang instagram">Instagram</span></h3>
+				<p><span class="lang instagram_desc">Здесь будут фотографии из вашего Instagram</span></p>
+				<div id="blueimp-gallery-instagram" class="blueimp-gallery">
+					<div class="slides"></div>
+					<h3 class="title"></h3>
+					<a class="prev">‹</a>
+					<a class="next">›</a>
+					<a class="close">×</a>
+					<a class="play-pause"></a>
+					<ol class="indicator"></ol>
+				</div>
+				<div id="instafeed" style="text-align:center;"></div>
+			</div>
+		</div>
+		<div data-role="page" id="youtube" data-theme="b">
+			<div data-role="content" data-theme="b">
+				<h3><span class="lang youtube">YouTube</span></h3>
+				<p><span class="lang youtube_desc">Здесь будут видео из вашего YouTube-канала или любого плэйлиста</span></p>
+				<!--<div data-role="popup" id="popupVideo" data-overlay-theme="b" data-theme="b" class="ui-content">
+					<a href="#" onclick="set_youtube('');" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>-->
+					<div id="youtube_player" style="display:none; position:fixed; top:0px; left:0px; z-index:9999;"></div>
+				<center><div id="videos"></div>				
+				<!--<a role="button" href="#popupVideo" data-rel="popup" data-position-to="window"><img id="lang_img" src="images/ru.jpg" /></a>-->
+				</center>
+			</div>
+		</div>
+		<div data-role="page" id="testimonials" data-theme="b">
+			<div data-role="content" data-theme="b">
+				<h3><span class="lang testimonials">Отзывы</span></h3>
+				<div class="contact">
+                    <img alt="" src="img/user3.jpg">
+                    <p>Julie Davis</p>
+                    <span>A wonderful serenity has...</span> 
+                    <span class="time">1 min ago</span> 
+                </div>
+				<div class="contact">
+					<img alt="" src="img/user7.jpg">
+					<p>Thomas Smith</p>
+					<span>One morning, when Gregor...</span> 
+					<span class="time">6 min ago</span> 
+				</div>
+				<div class="contact">
+					<img alt="" src="img/user6.jpg">
+					<p>Dean Kist</p>
+					<span>Far far away, behind the...</span> 
+					<span class="time">1 hour ago</span> 
+				</div>
+				<div class="contact">
+					<img alt="" src="img/user5.jpg">
+					<p>Anita Bell</p>
+					<span>But I must explain to you...</span> 
+					<span class="time">3 hour ago</span> 
+				</div>
+				<div class="contact">
+					<img alt="" src="img/user4.jpg">
+					<p>David Wright</p>
+					<span>The quick brown fox jum...</span> 
+					<span class="time">Yesterday</span> 
+				</div>
+				<div class="contact">
+					<img alt="" src="img/user8.jpg">
+					<p>Julie Davis</p>
+					<span>A wonderful serenity has...</span> 
+					<span class="time">Yesterday</span> 
+				</div>
+				<div class="contact">
+					<img alt="" src="img/user2.jpg">
+					<p>Thomas Smith</p>
+					<span>Far far away, behind the...</span> 
+					<span class="time">Yesterday</span> 
+				</div>
+				<div class="contact">
+					<img alt="" src="img/user7.jpg">
+					<p>Sara Connors</p>
+					<span>A wonderful serenity has...</span> 
+					<span class="time">1 min ago</span> 
+				</div>
+				<div class="contact">
+					<img alt="" src="img/user7.jpg">
+					<p>Anita Bell</p>
+					<span>But I must explain to you...</span> 
+					<span class="time">3 days ago</span> 
+				</div>
+				<div class="contact">
+					<img alt="" src="img/user2.jpg">
+					<p>David Wright</p>
+					<span>The quick brown fox jum...</span> 
+					<span class="time">Last week</span> 
+				</div>
+			</div>
+		</div>
+		<div data-role="page" id="push" data-theme="b">
+			<div data-role="content" data-theme="b">
+				<h3><span class="lang push">Уведомления</span></h3>
+				<p><span class="lang push_sample">Введите любой текст и нажмите кнопку <b>Отправить</b>. Приложение закроется, и в течение 10 секунд получите уведомление. Нажмите на него, чтобы снова открыть приложение.</span></p>
+				<textarea id="push_text" onkeyup="refreshSendButton();" onchange="refreshSendButton();" maxlength="140"></textarea>
+				<button id="push_send" class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-corner-all" disabled="disabled" onclick="sendPush();"><span class="lang push_send">Отправить</span></button>
+				<p><span class="lang push_desc">Push-уведомления можно рассматривать как небольшой диалог между покупателем и продавцом. Это мощный маркетинговый инструмент при эффективном использовании.<br />Основной целью Push-уведомлений является информирование пользователей о новостях компании, обновлении ассортимента услуг и товаров, предстоящих акциях или скидках, либо просто напоминание о себе.</span></p>
+			</div>
+		</div>
+		
+		<div data-role="panel" id="externalpanel" data-position="left" data-display="overlay" data-theme="b">
+			<ul data-role="listview">
+				<li><a id="main_btn" class="ui-btn ui-btn-icon-left ui-icon-home ui-nodisc-icon"><span class="lang home_menu">Главная</span></a></li>
+				<li><a id="news_btn" class="ui-btn ui-btn-icon-left ui-icon-rss ui-nodisc-icon"><span class="lang news_menu">Новости</span></a></li>
+				<li><a id="services_btn" class="ui-btn ui-btn-icon-left ui-icon-service ui-nodisc-icon"><span class="lang services_menu">Услуги</span></a></li>
+				<li data-role="collapsible" data-iconpos="right" class="ui-nodisc-icon">
+					<h3 id="gallery_btn" class="ui-btn ui-btn-icon-left ui-icon-gallery ui-nodisc-icon"><span class="lang gallery_menu" style="margin-left:22px;">Галерея</span></h3>
+					<ul data-role="listview" id="gallery_col">
+						<li><a id="portfolio_btn" class="ui-btn ui-btn-icon-left ui-icon-portfolio ui-nodisc-icon"><span class="lang portfolio_menu">Портфолио</span></a></li>
+						<li><a id="instagram_btn" class="ui-btn ui-btn-icon-left ui-icon-instagram ui-nodisc-icon"><span class="lang instagram_menu">Instagram</span></a></li>
+						<li><a id="youtube_btn" class="ui-btn ui-btn-icon-left ui-icon-youtube ui-nodisc-icon"><span class="lang youtube_menu">YouTube</span></a></li>
+					</ul>
+				</li>
+				<li><a id="testimonials_btn" class="ui-btn ui-btn-icon-left ui-icon-testimonial ui-nodisc-icon"><span class="lang testimonials_menu">Отзывы</span></a></li>
+				<li data-role="collapsible" data-iconpos="right" class="ui-nodisc-icon">
+					<h3 id="share_btn" class="ui-btn ui-btn-icon-left ui-icon-share ui-nodisc-icon"><span class="lang share_menu" style="margin-left:22px;">Поделиться</span></h3>
+					<ul data-role="listview" id="share_col">
+						<li><a id="fb_btn" class="ui-btn ui-btn-icon-left ui-icon-facebook ui-nodisc-icon"><span class="lang fb_menu">FaceBook</span></a></li>
+						<li><a id="tw_btn" class="ui-btn ui-btn-icon-left ui-icon-twitter ui-nodisc-icon"><span class="lang tw_menu">Twitter</span></a></li>
+						<li><a id="etc_btn" class="ui-btn ui-btn-icon-left ui-icon-share-other ui-nodisc-icon"><span class="lang etc_menu">Другое</span></a></li>
+					</ul>
+				</li>
+				<li><a id="push_btn" class="ui-btn ui-btn-icon-left ui-icon-push ui-nodisc-icon"><span class="lang push_menu">Уведомления</span></a></li>
+				<li><a id="contact_btn" class="ui-btn ui-btn-icon-left ui-icon-contacts ui-nodisc-icon"><span class="lang contacts_menu">Контакты</span></a></li>
+			</ul>
+		</div>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script type="text/javascript" src="js/jquery.ui.map.min.js"></script>
+		<script type="text/javascript" src="js/youtube.js"></script>
+		<script type="text/javascript" src="js/instafeed.min.js"></script>
+		<script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>
+		<script type="text/javascript">
+			$(function(){
+				function showMap(event, ui) {
+					var myOptions = {
+					  zoom: 10,
+					  center: new google.maps.LatLng(59.934661, 30.332265),
+					  mapTypeId: google.maps.MapTypeId.ROADMAP
+					};
+					var map = new google.maps.Map(document.getElementById("map"), myOptions);
+					var marker = new google.maps.Marker({
+					  position: new google.maps.LatLng(60.021113, 30.417559), map: map, title: 'МЫ!'
+					});
+				}
+				$('#contact').on('pageshow', showMap);			
+				$("body>[data-role='panel']").panel();
+				$("#externalpanel ul").listview();
+				$("#externalpanel").trigger("create");
+				/*
+				$("body>[data-role='page']").each(function(index){
+					pages[this.id] = $("#" + this.id).detach();
+				});
+				navigateTo('main');*/
+			});
+			$( document ).one( "pageshow", function() {
+				$( "body > [data-role='header']" ).toolbar();
+				$( "body > [data-role='header'] [data-role='navbar']" ).navbar();
+			});
+			//grabNews(onShortNews, false);
+        </script>
+	</body>
+</html>
