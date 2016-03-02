@@ -13,6 +13,7 @@
     <plugin name="cordova-plugin-screen-orientation" />
     <plugin name="phonegap-plugin-push" />
     <plugin name="cordova-plugin-x-socialsharing" />
+    <plugin name="cordova-plugin-fullscreen" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
