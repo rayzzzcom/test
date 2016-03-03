@@ -40,29 +40,29 @@ function grabNews(callback, bForse) {
 		var url = getSetting('posts_url', "http://rayzzz.com/dolphin/blogs/?action=json&user=#user#&id=#id#").replace('#user#', user);
 		url = url.replace('#id#', oNews['last']);
 		$.ajax({type: "GET", url: url, cache: false, dataType:'jsonp', crossDomain: true, success: function(data){
-			wallpaper.getPath(images_path, function(path){
+//			wallpaper.getPath(images_path, function(path){
 				oNews['date'] = iTimeNow;
-				var j=0;
-				for(var i=0; i<data.length; i++) {
-					if(data[i]['icon'] != null) {
-						var file = data[i]['id'] + '_icon';
-						wallpaper.saveImage(data[i]['icon'], file, images_path, function(result){
-							//data[i]['icon'] = result;
-						}, null);
-						data[i]['icon'] = path + file + '.jpeg';
-					}
-					j=0;
-					data[i]['body'] = data[i]['body'].replace(/<img ([^>])*/gi, function(res) {
-						res = res.replace(/src="([^">])*/gi, function(res1) {
-							j++;
-							var url = res1.substring(5);
-							var file = data[i]['id'] + '_image_' + j;
-							wallpaper.saveImage(url, file, images_path, null, null);
-							return 'src="' + path + file + '.jpeg';
-						});
-						return res;
-					});
-				}
+//				var j=0;
+//				for(var i=0; i<data.length; i++) {
+//					if(data[i]['icon'] != null) {
+//						var file = data[i]['id'] + '_icon';
+//						wallpaper.saveImage(data[i]['icon'], file, images_path, function(result){
+//							data[i]['icon'] = result;
+//						}, null);
+//						data[i]['icon'] = path + file + '.jpeg';
+//					}
+//					j=0;
+//					data[i]['body'] = data[i]['body'].replace(/<img ([^>])*/gi, function(res) {
+//						res = res.replace(/src="([^">])*/gi, function(res1) {
+//							j++;
+//							var url = res1.substring(5);
+//							var file = data[i]['id'] + '_image_' + j;
+//							wallpaper.saveImage(url, file, images_path, null, null);
+//							return 'src="' + path + file + '.jpeg';
+//						});
+//						return res;
+//					});
+//				}
 				if(data[0] != undefined && data[0]['id'] != undefined) {
 					oNews['last'] = data[0]['id'];
 					oNews['items'] = data.concat(oNews['items']);
@@ -72,7 +72,7 @@ function grabNews(callback, bForse) {
 					oNews['newItems'] = data;
 					callback();
 				}
-			}, null);
+//			}, null);
 		  },
 		  error: function(XMLHttpRequest, textStatus, errorThrown) { 
 			alert("Status: " + textStatus + " Error: " + errorThrown); 
@@ -99,7 +99,7 @@ function printNews(itemsId, limit, container) {
 		limit = oNews[itemsId].length;
 	var sContent = '';
 	for(var i=0; i<limit; i++) {
-		var img = oNews[itemsId][i]['icon'] == null ? '' : '<img width="99%" src="' + oNews[itemsId][i]['icon'] + '" />';
+		var img = oNews[itemsId][i]['icon'] == null ? '' : '<img src="' + oNews[itemsId][i]['icon'] + '" />';
 		sContent += '<a onclick="setNewsPost(' + i + ')"><div class="news_post">' + img + '<div class="news_title">' + oNews[itemsId][i]['caption'] + '</div></div></a>';
 	}
 	if(container == undefined)
